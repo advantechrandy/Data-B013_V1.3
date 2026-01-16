@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>風扇扇葉設計技術說明</title>
+    <!-- 強制使用 UTF-8 並引入 MathJax，確保所有數學符號由專用引擎渲染 -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Roboto+Mono&display=swap');
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #1a1a1b;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .industrial-border {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .tech-card {
+            background: #262626;
+            border: 1px solid #3f3f46;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .header-gradient {
+            background: linear-gradient(90deg, #27272a 0%, #18181b 100%);
+            border-bottom: 2px solid #f59e0b;
+        }
+
+        h1, h2, h3 {
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* 工業感捲軸 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 tex2jax_process">
+
+    <div class="max-w-5xl mx-auto">
+        <!-- Header -->
+        <header class="header-gradient p-6 mb-8 rounded-t-lg">
+            <h1 class="text-3xl font-bold text-amber-500">風扇扇葉設計技術說明 V1.3</h1>
+            <p class="text-sm text-zinc-400 mt-2 italic">FAN BLADE DESIGN TECHNICAL SPECIFICATION</p>
+        </header>
+
+        <!-- 一、 核心設計原則 -->
+        <section class="mb-10 industrial-border pl-6">
+            <h2 class="text-xl font-bold mb-4 text-zinc-100">一、 核心設計原則</h2>
+            <p class="mb-4 text-zinc-300">
+                高效能風扇設計需平衡 <span class="text-amber-500 font-semibold">氣流輸出 (Airflow)</span> 與 <span class="text-amber-500 font-semibold">靜壓 (Static Pressure)</span>，同時最小化流體誘導噪音。設計過程的核心在於應用流體力學中的翼型理論，優化葉片表面壓力。
+            </p>
+        </section>
+
+        <!-- 二、 數學公式區塊 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            <div class="tech-card p-6 rounded">
+                <h3 class="text-amber-500 font-bold mb-3">1. 攻角與升力 (Lift)</h3>
+                <p class="text-sm mb-4 text-zinc-300">根據白努利定律，翼型產生的升力 $L$ 可由下式計算：</p>
+                <div class="bg-black/30 p-4 rounded text-center text-xl">
+                    $$L = \frac{1}{2} \rho v^2 A C_L$$
+                </div>
+                <ul class="text-xs text-zinc-400 mt-4 space-y-2">
+                    <li>$\rho$ (Rho) ：空氣密度</li>
+                    <li>$v$ ：流速</li>
+                    <li>$C_L$ ：升力係數</li>
+                </ul>
+            </div>
+
+            <div class="tech-card p-6 rounded">
+                <h3 class="text-amber-500 font-bold mb-3">2. 性能係數 (Power)</h3>
+                <p class="text-sm mb-4 text-zinc-300">風扇所消耗的功率 $P$ 比例於轉速的立方：</p>
+                <div class="bg-black/30 p-4 rounded text-center text-xl">
+                    $$P \propto n^3 \cdot D^5$$
+                </div>
+                <ul class="text-xs text-zinc-400 mt-4 space-y-2">
+                    <li>$n$ ：轉速 (RPM)</li>
+                    <li>$D$ ：葉輪直徑</li>
+                    <li>$\propto$ (Proportional) ：正比關係符號</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 三、 技術細節 -->
+        <section class="space-y-8">
+            <div class="tech-card p-6 rounded">
+                <h2 class="text-lg font-bold mb-4 border-b border-zinc-700 pb-2 text-zinc-100">二、 幾何特徵優化</h2>
+                <div class="grid grid-cols-1 gap-6">
+                    <div>
+                        <h4 class="font-bold text-amber-500 mb-2">1. 弦長 (Chord Length) 與 扭轉角 (Twist Angle)</h4>
+                        <p class="text-sm text-zinc-300">
+                            由於葉片不同半徑位置的圓周速度不同，必須從輪轂 (Hub) 到葉尖 (Tip) 進行扭轉設計，以確保氣流分佈均勻。
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-500 mb-2">2. 翼型截面 (Airfoil Profile)</h4>
+                        <p class="text-sm text-zinc-300">
+                            採用高效能翼型可有效提升 $\frac{C_L}{C_D}$ (升阻比)，並透過前端圓弧與末端尖銳的設計，降低亂流產生的阻力。
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-500 mb-2">3. 前掠與後掠 (Sweep Design)</h4>
+                        <p class="text-sm text-zinc-300">
+                            前掠翼有助於提升低轉速時的進氣量；後掠翼則能延遲空氣壓縮，顯著降低高轉速下的切風噪音。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-card p-6 rounded border-l-4 border-red-900">
+                <h2 class="text-lg font-bold mb-4 text-zinc-100">三、 噪音控制技術 (Acoustics)</h2>
+                <p class="text-sm mb-4 text-zinc-300">
+                    噪音主要來自葉尖渦流 (Tip Vortex)。目前的技術手段包括：
+                </p>
+                <ul class="list-disc list-inside text-sm space-y-2 text-zinc-300">
+                    <li><span class="text-amber-500 font-semibold">鋸齒狀後緣：</span> 破壞大型渦流，轉化為微小的高頻震盪。</li>
+                    <li><span class="text-amber-500 font-semibold">葉尖環型導流：</span> 減少葉片兩側壓力差導致的跨葉尖流動。</li>
+                    <li><span class="text-amber-500 font-semibold">非對稱葉片分佈：</span> 避免在特定頻率產生諧振。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-zinc-500 text-xs border-t border-zinc-800 pt-6 pb-8">
+            <p class="mt-2 text-zinc-600 font-mono tracking-tighter">CREATED BY RANDY CHEN</p>
+        </footer>
+    </div>
+
+    <script>
+        // 禁用右鍵選單功能
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        }, false);
+
+        // 確保 MathJax 渲染後的視覺檢查
+        window.addEventListener('load', function() {
+            console.log("技術文檔已完成渲染，已針對編碼異常進行符號轉義處理。");
+        });
+    </script>
+</body>
+</html>
